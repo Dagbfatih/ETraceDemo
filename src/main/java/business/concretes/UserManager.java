@@ -6,13 +6,16 @@ import core.utilities.results.Result;
 import core.utilities.results.SuccessDataResult;
 import core.utilities.results.SuccessResult;
 import dataAccess.abstracts.UserDao;
-import dataAccess.concrete.HibernateUserDao;
 import entities.concrete.User;
 
 import java.util.List;
 
 public class UserManager implements UserService {
-    UserDao userDao = new HibernateUserDao();
+    UserDao userDao;
+
+    public UserManager(UserDao userDaoInstance) {
+        userDao = userDaoInstance;
+    }
 
     @Override
     public Result add(User user) {
@@ -34,16 +37,16 @@ public class UserManager implements UserService {
 
     @Override
     public DataResult<List<User>> getAll() {
-        return new SuccessDataResult<List<User>>(userDao.getAll());
+        return new SuccessDataResult<>(userDao.getAll());
     }
 
     @Override
     public DataResult<User> get(int id) {
-        return new SuccessDataResult<User>(userDao.get(user -> user.getId() == id));
+        return new SuccessDataResult<>(userDao.get(user -> user.getId() == id));
     }
 
     @Override
     public DataResult<User> getByEmail(String email) {
-        return new SuccessDataResult<User>(userDao.get(u -> u.getEmail() == email));
+        return new SuccessDataResult<>(userDao.get(u -> u.getEmail().equals(email)));
     }
 }

@@ -23,7 +23,7 @@ public abstract class Validator<T> {
         var resultMessage = "İşlem başarılı";
 
         if (validationErrors.get().count() > 0) {
-            resultMessage = String.join(",", validationErrors.get().map(Result::getMessage).toList());
+            resultMessage = String.join("\n", validationErrors.get().map(Result::getMessage).toList());
             return new ErrorResult(resultMessage);
         }
 

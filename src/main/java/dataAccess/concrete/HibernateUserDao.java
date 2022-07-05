@@ -8,7 +8,11 @@ import java.util.List;
 import java.util.function.Function;
 
 public class HibernateUserDao implements UserDao {
-    UserDb userDb = new UserDb();
+    UserDb userDb;
+
+    public HibernateUserDao(UserDb userDbInstance) {
+        userDb = userDbInstance;
+    }
 
     @Override
     public void add(User user) {

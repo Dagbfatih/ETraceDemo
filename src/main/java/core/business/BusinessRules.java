@@ -3,8 +3,10 @@ package core.business;
 import core.utilities.results.Result;
 import core.utilities.results.SuccessResult;
 
-public class businessRules {
-    public static Result Run(Result results[]) {
+import java.util.List;
+
+public class BusinessRules {
+    public static Result Run(List<Result> results) {
         for (Result result :
                 results) {
             if (!result.isSuccess()) {
